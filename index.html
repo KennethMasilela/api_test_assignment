@@ -1,115 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Junior Dev API Test</title>
+  <meta charset="UTF-8">
+  <title>Junior Dev API Validator</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f9f9f9;
+      background: #f5f5f5;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
-
     .container {
-      text-align: center;
-      max-width: 500px;
-      width: 90%;
-      background: white;
+      background: #fff;
       padding: 30px;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 400px;
     }
-
-    h1 {
-      color: #2196F3;
-      font-size: 22px;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      margin-bottom: 5px;
-      font-weight: bold;
-      font-size: 14px;
-      color: #333;
-    }
-
-    input[type="email"],
-    input[type="url"] {
+    input, button {
       width: 100%;
       padding: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
+      margin: 10px 0;
     }
-
     button {
-      width: 100%;
-      background: #2196F3;
+      background-color: #2196F3;
       color: white;
-      padding: 12px;
-      font-size: 15px;
       border: none;
-      border-radius: 4px;
       cursor: pointer;
     }
-
     button:hover {
-      background: #0b7dda;
+      background-color: #0b7dda;
     }
-
     #result {
       margin-top: 20px;
       background: #eef;
-      padding: 12px;
-      border: 1px solid #ccc;
+      padding: 10px;
       border-radius: 4px;
-      white-space: pre-wrap;
-      font-size: 14px;
+      color: #333;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Validate Your Junior Dev API</h1>
+    <h2>Validate API Endpoint</h2>
     <form id="testForm">
-      <label for="email">Email:</label>
-      <input type="email" id="email" required />
-
-      <label for="url">Your API Endpoint URL:</label>
-      <input type="url" id="url" placeholder="https://yourdomain.com/webhook" required />
-
-      <button type="submit">Test My API</button>
+      <input type="email" id="email" placeholder="Your Email" required />
+      <input type="url" id="url" placeholder="Your API URL" required />
+      <button type="submit">Run Test</button>
     </form>
-
     <div id="result"></div>
   </div>
 
   <script>
     document.getElementById("testForm").addEventListener("submit", async function (e) {
       e.preventDefault();
-
       const email = document.getElementById("email").value;
       const url = document.getElementById("url").value;
-      const testUrl = `https://yhxzjyykdsfkdrmdxgho.supabase.co/functions/v1/junior-dev?url=${encodeURIComponent(url)}&email=${encodeURIComponent(email)}`;
+      const testURL = `https://yhxzjyykdsfkdrmdxgho.supabase.co/functions/v1/junior-dev?url=${encodeURIComponent(url)}&email=${encodeURIComponent(email)}`;
 
       const resultDiv = document.getElementById("result");
-      resultDiv.textContent = "⏳ Testing your API...";
+      resultDiv.textContent = "⏳ Testing...";
 
       try {
-        const response = await fetch(testUrl);
+        const response = await fetch(testURL);
         const data = await response.text();
         resultDiv.textContent = `✅ Response:\n${data}`;
       } catch (error) {
